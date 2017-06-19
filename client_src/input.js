@@ -1,5 +1,7 @@
 'use strict';
 
+'develope ver 1.0'
+
 $.fn.extend({
     animateCss: function animateCss(animationName) {
         var animationEnd = 'webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend';
@@ -144,19 +146,6 @@ class Button {
     }
     // 행 수정
     rowEdit() {
-        var com = `
-            edit ...
-            누구나
-            한번쯤
-            이렇게 코딩해보고 싶어 한다.
-            이제는 진짜
-            안된다.
-            제발
-            플리즈..
-            1
-
-
-        `;
         console.log(com);
         console.log("행수정");
     }

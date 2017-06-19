@@ -1,5 +1,7 @@
 'use strict';
 
+'develope ver 1.0';
+
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -186,7 +188,6 @@ var Button = function () {
     }, {
         key: 'rowEdit',
         value: function rowEdit() {
-            var com = '\n            edit ...\n            \uB204\uAD6C\uB098\n            \uD55C\uBC88\uCBE4\n            \uC774\uB807\uAC8C \uCF54\uB529\uD574\uBCF4\uACE0 \uC2F6\uC5B4 \uD55C\uB2E4.\n            \uC774\uC81C\uB294 \uC9C4\uC9DC\n            \uC548\uB41C\uB2E4.\n            \uC81C\uBC1C\n            \uD50C\uB9AC\uC988..\n            1\n\n\n        ';
             console.log(com);
             console.log("행수정");
         }

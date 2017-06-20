@@ -52,6 +52,9 @@ $(document).ready(function () {
     var server_send_data = [];
     window.btn = new Button(server_send_data);
 
+    var render = new Render();
+    render.memberMngAddRowDisplay();
+
 });
 
 class Button {
@@ -179,16 +182,49 @@ class Render {
         var index = tr.length + 1;
 
         var html = `
-            <tr><td class='text-cetner'>${index}</td>
-                <td class='text-cetner'>${site_agent}</td>
-                <td class='text-cetner'>${userid}</td>
-                <td class='text-cetner'>${rate}</td>
-                <td class='text-cetner'><button class='btn form-control btn-info mx-auto' syle='width:77px'  onclick='btn.rowRemove()'>삭제</button></td>
-                <td class='text-cetner'><button class='btn form-control btn-info mx-auto' syle='width:77px'  onclick='btn.rowEdit()'>수정</button></td>
+            <tr>
+                <td class='text-center'>${index}</td>
+                <td class='text-center'>${site_agent}</td>
+                <td class='text-center'>${userid}</td>
+                <td class='text-center'>${rate}</td>
+                <td class='text-center'>Y</td>
+                <td class='text-center'>2017-06-20 15:00:00</td>
+                <td class='text-center'>
+                    <button class='btn form-control btn-info mx-auto' syle='width:77px' onclick='btn.rowRemove()'>삭제</button>
+                </td>
+                <td class='text-center'>
+                    <button class='btn form-control btn-info mx-auto' syle='width:77px' onclick='btn.rowEdit()'>수정</button>
+                </td>
             </tr>
                 
         `;
         result.append(html);
+    }
+
+    memberMngAddRowDisplay() {
+        var result = $("#memberList > tbody");
+        var tr = $("#memberList > tbody > tr");
+        var index = tr.length + 1;
+
+        var html = `
+            <tr>
+                <td class='text-center'>1</td>
+                <td class='text-center'>홍길동</td>
+                <td class='text-center'>hong</td>
+                <td class='text-center'>1234</td>
+                <td class='text-center'></td>
+                <td class='text-center'>2017-06-20 15:00:00</td>
+                <td class='text-center'>
+                    <button class='btn form-control btn-info mx-auto' syle='width:77px' onclick='btn.rowRemove()'>삭제</button>
+                </td>
+                <td class='text-center'>
+                    <button class='btn form-control btn-info mx-auto' syle='width:77px' onclick='btn.rowEdit()'>수정</button>
+                </td>
+            </tr>
+                
+        `;
+        result.append(html);
+
     }
 }
 

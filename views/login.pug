@@ -1,0 +1,35 @@
+doctype html
+html
+  head
+    title= title
+    link(rel='stylesheet', href='/stylesheets/style.css')
+    link(rel='stylesheet', href='https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css')
+    link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css')
+    link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css')
+    line(rel='https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css')
+    script(src='https://code.jquery.com/jquery-3.2.1.min.js')
+    script(src='https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js')
+    script(src='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js')
+    
+  body
+    .container
+        
+        p
+
+        h1.text-center XYZ
+            span(style='color:red') RED 
+                span(style='color:blue') - ADMINISTRATOR
+
+        p
+
+        form.form-control(id="loginForm", action="/login" method="post")
+            input.form-control.mb-1(type='text' name='userid' placeholder="아이디" value=userid) 
+            input.form-control.mb-1(type='text' name='password' placeholder="패스워드" value=password) 
+            input.form-control.mb-1(type='button' value='로그인' onclick='member.login()')
+            input.form-control.mb-1(type='button' value='회원가입' onclick='member.register()')
+
+        script(src='https://code.jquery.com/jquery-3.2.1.min.js')
+        script(src="/javascripts/member.js")
+
+
+

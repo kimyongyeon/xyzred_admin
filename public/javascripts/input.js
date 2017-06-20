@@ -55,6 +55,9 @@ $(document).ready(function () {
 
     var server_send_data = [];
     window.btn = new Button(server_send_data);
+
+    var render = new Render();
+    render.memberMngAddRowDisplay();
 });
 
 var Button = function () {
@@ -234,7 +237,17 @@ var Render = function () {
             var tr = $("#result_set > tbody > tr");
             var index = tr.length + 1;
 
-            var html = '\n            <tr><td class=\'text-cetner\'>' + index + '</td>\n                <td class=\'text-cetner\'>' + site_agent + '</td>\n                <td class=\'text-cetner\'>' + userid + '</td>\n                <td class=\'text-cetner\'>' + rate + '</td>\n                <td class=\'text-cetner\'><button class=\'btn form-control btn-info mx-auto\' syle=\'width:77px\'  onclick=\'btn.rowRemove()\'>\uC0AD\uC81C</button></td>\n                <td class=\'text-cetner\'><button class=\'btn form-control btn-info mx-auto\' syle=\'width:77px\'  onclick=\'btn.rowEdit()\'>\uC218\uC815</button></td>\n            </tr>\n                \n        ';
+            var html = '\n            <tr>\n                <td class=\'text-center\'>' + index + '</td>\n                <td class=\'text-center\'>' + site_agent + '</td>\n                <td class=\'text-center\'>' + userid + '</td>\n                <td class=\'text-center\'>' + rate + '</td>\n                <td class=\'text-center\'>Y</td>\n                <td class=\'text-center\'>2017-06-20 15:00:00</td>\n                <td class=\'text-center\'>\n                    <button class=\'btn form-control btn-info mx-auto\' syle=\'width:77px\' onclick=\'btn.rowRemove()\'>\uC0AD\uC81C</button>\n                </td>\n                <td class=\'text-center\'>\n                    <button class=\'btn form-control btn-info mx-auto\' syle=\'width:77px\' onclick=\'btn.rowEdit()\'>\uC218\uC815</button>\n                </td>\n            </tr>\n                \n        ';
+            result.append(html);
+        }
+    }, {
+        key: 'memberMngAddRowDisplay',
+        value: function memberMngAddRowDisplay() {
+            var result = $("#memberList > tbody");
+            var tr = $("#memberList > tbody > tr");
+            var index = tr.length + 1;
+
+            var html = '\n            <tr>\n                <td class=\'text-center\'>1</td>\n                <td class=\'text-center\'>\uD64D\uAE38\uB3D9</td>\n                <td class=\'text-center\'>hong</td>\n                <td class=\'text-center\'>1234</td>\n                <td class=\'text-center\'></td>\n                <td class=\'text-center\'>2017-06-20 15:00:00</td>\n                <td class=\'text-center\'>\n                    <button class=\'btn form-control btn-info mx-auto\' syle=\'width:77px\' onclick=\'btn.rowRemove()\'>\uC0AD\uC81C</button>\n                </td>\n                <td class=\'text-center\'>\n                    <button class=\'btn form-control btn-info mx-auto\' syle=\'width:77px\' onclick=\'btn.rowEdit()\'>\uC218\uC815</button>\n                </td>\n            </tr>\n                \n        ';
             result.append(html);
         }
     }]);

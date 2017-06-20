@@ -12,4 +12,53 @@ html
     script(src='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js')
     
   body
-    block content
+    h1
+      .row
+          .col-12
+              a(href='/')
+                i(class="fa fa-camera-retro")  #{title}
+  p
+
+  nav.navbar.navbar-toggleable-md.navbar-light.bg-faded
+    button.navbar-toggler(type='button', data-toggle='collapse', data-target='#navbarTogglerDemo01', aria-controls='navbarTogglerDemo01', aria-expanded='false', aria-label='Toggle navigation')
+      span.navbar-toggler-icon
+    #navbarTogglerDemo01.collapse.navbar-collapse
+      a.navbar-brand(href='/') Home
+      ul.navbar-nav.mr-auto.mt-2.mt-lg-0
+        li.nav-item.mr-1
+          .dropdown
+            button#dropdownMenu2.btn.btn-secondary.dropdown-toggle(type='button', data-toggle='dropdown', aria-haspopup='true', aria-expanded='false') Agent Management
+            .dropdown-menu(aria-labelledby='dropdownMenu2')
+              a(href='/inputs')
+                button.dropdown-item(type='button') 에이전트 생성
+              button.dropdown-item(type='button') 에이전트 리스트
+              button.dropdown-item(type='button') 에이전트 총 / 환전내역
+              button.dropdown-item(type='button') 에이전트 지분 관리
+
+        li.nav-item.mr-1
+          .dropdown
+            button#dropdownMenu2.btn.btn-secondary.dropdown-toggle(type='button', data-toggle='dropdown', aria-haspopup='true', aria-expanded='false') Agents
+            .dropdown-menu(aria-labelledby='dropdownMenu2')
+              button.dropdown-item(type='button') 에이전트1
+              button.dropdown-item(type='button') 에이전트2
+        li.nav-item.mr-1
+          .dropdown
+            button#dropdownMenu2.btn.btn-secondary.dropdown-toggle(type='button', data-toggle='dropdown', aria-haspopup='true', aria-expanded='false') Reports
+            .dropdown-menu(aria-labelledby='dropdownMenu2')
+              button.dropdown-item(type='button') 에이전트 수익
+              button.dropdown-item(type='button') 회차 결과 / 수익 / 손실
+              
+        li.nav-item
+          a.nav-link.disabled(href='#') Disabled
+      form.form-inline.my-2.my-lg-0
+        input.form-control.mr-sm-2(type='text', placeholder='Search')
+        button.btn.btn-outline-success.my-2.my-sm-0(type='submit') Search
+  
+  p
+
+
+
+
+  block content
+
+

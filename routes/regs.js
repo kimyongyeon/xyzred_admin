@@ -3,6 +3,7 @@
  */
 var express = require('express');
 const router = express.Router();
+var config = require('../config');
 
 router.get('/', (req, res) => {
     var arrays = [];
@@ -30,7 +31,7 @@ router.get('/', (req, res) => {
     }
 
     var msg = {
-        title: 'Kostabit 슈퍼 관리자',
+        title: config.header,
         tables: arrays,
         crashRates: crashRates,
         riskPer: riskPer

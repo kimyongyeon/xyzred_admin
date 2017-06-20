@@ -1,5 +1,7 @@
 'use strict';
 
+'develope ver 1.0'
+
 $.fn.extend({
     animateCss: function animateCss(animationName) {
         var animationEnd = 'webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend';
@@ -49,6 +51,9 @@ $(document).ready(function () {
     
     var server_send_data = [];
     window.btn = new Button(server_send_data);
+
+    var render = new Render();
+    render.memberMngAddRowDisplay();
 
 });
 
@@ -144,19 +149,6 @@ class Button {
     }
     // 행 수정
     rowEdit() {
-        var com = `
-            edit ...
-            누구나
-            한번쯤
-            이렇게 코딩해보고 싶어 한다.
-            이제는 진짜
-            안된다.
-            제발
-            플리즈..
-            1
-
-
-        `;
         console.log(com);
         console.log("행수정");
     }
@@ -190,16 +182,49 @@ class Render {
         var index = tr.length + 1;
 
         var html = `
-            <tr><td class='text-cetner'>${index}</td>
-                <td class='text-cetner'>${site_agent}</td>
-                <td class='text-cetner'>${userid}</td>
-                <td class='text-cetner'>${rate}</td>
-                <td class='text-cetner'><button class='btn form-control btn-info mx-auto' syle='width:77px'  onclick='btn.rowRemove()'>삭제</button></td>
-                <td class='text-cetner'><button class='btn form-control btn-info mx-auto' syle='width:77px'  onclick='btn.rowEdit()'>수정</button></td>
+            <tr>
+                <td class='text-center'>${index}</td>
+                <td class='text-center'>${site_agent}</td>
+                <td class='text-center'>${userid}</td>
+                <td class='text-center'>${rate}</td>
+                <td class='text-center'>Y</td>
+                <td class='text-center'>2017-06-20 15:00:00</td>
+                <td class='text-center'>
+                    <button class='btn form-control btn-info mx-auto' syle='width:77px' onclick='btn.rowRemove()'>삭제</button>
+                </td>
+                <td class='text-center'>
+                    <button class='btn form-control btn-info mx-auto' syle='width:77px' onclick='btn.rowEdit()'>수정</button>
+                </td>
             </tr>
                 
         `;
         result.append(html);
+    }
+
+    memberMngAddRowDisplay() {
+        var result = $("#memberList > tbody");
+        var tr = $("#memberList > tbody > tr");
+        var index = tr.length + 1;
+
+        var html = `
+            <tr>
+                <td class='text-center'>1</td>
+                <td class='text-center'>홍길동</td>
+                <td class='text-center'>hong</td>
+                <td class='text-center'>1234</td>
+                <td class='text-center'></td>
+                <td class='text-center'>2017-06-20 15:00:00</td>
+                <td class='text-center'>
+                    <button class='btn form-control btn-info mx-auto' syle='width:77px' onclick='btn.rowRemove()'>삭제</button>
+                </td>
+                <td class='text-center'>
+                    <button class='btn form-control btn-info mx-auto' syle='width:77px' onclick='btn.rowEdit()'>수정</button>
+                </td>
+            </tr>
+                
+        `;
+        result.append(html);
+
     }
 }
 

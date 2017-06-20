@@ -1,5 +1,7 @@
 'use strict';
 
+'develope ver 1.0';
+
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -53,6 +55,9 @@ $(document).ready(function () {
 
     var server_send_data = [];
     window.btn = new Button(server_send_data);
+
+    var render = new Render();
+    render.memberMngAddRowDisplay();
 });
 
 var Button = function () {
@@ -186,7 +191,6 @@ var Button = function () {
     }, {
         key: 'rowEdit',
         value: function rowEdit() {
-            var com = '\n            edit ...\n            \uB204\uAD6C\uB098\n            \uD55C\uBC88\uCBE4\n            \uC774\uB807\uAC8C \uCF54\uB529\uD574\uBCF4\uACE0 \uC2F6\uC5B4 \uD55C\uB2E4.\n            \uC774\uC81C\uB294 \uC9C4\uC9DC\n            \uC548\uB41C\uB2E4.\n            \uC81C\uBC1C\n            \uD50C\uB9AC\uC988..\n            1\n\n\n        ';
             console.log(com);
             console.log("행수정");
         }
@@ -233,7 +237,17 @@ var Render = function () {
             var tr = $("#result_set > tbody > tr");
             var index = tr.length + 1;
 
-            var html = '\n            <tr><td class=\'text-cetner\'>' + index + '</td>\n                <td class=\'text-cetner\'>' + site_agent + '</td>\n                <td class=\'text-cetner\'>' + userid + '</td>\n                <td class=\'text-cetner\'>' + rate + '</td>\n                <td class=\'text-cetner\'><button class=\'btn form-control btn-info mx-auto\' syle=\'width:77px\'  onclick=\'btn.rowRemove()\'>\uC0AD\uC81C</button></td>\n                <td class=\'text-cetner\'><button class=\'btn form-control btn-info mx-auto\' syle=\'width:77px\'  onclick=\'btn.rowEdit()\'>\uC218\uC815</button></td>\n            </tr>\n                \n        ';
+            var html = '\n            <tr>\n                <td class=\'text-center\'>' + index + '</td>\n                <td class=\'text-center\'>' + site_agent + '</td>\n                <td class=\'text-center\'>' + userid + '</td>\n                <td class=\'text-center\'>' + rate + '</td>\n                <td class=\'text-center\'>Y</td>\n                <td class=\'text-center\'>2017-06-20 15:00:00</td>\n                <td class=\'text-center\'>\n                    <button class=\'btn form-control btn-info mx-auto\' syle=\'width:77px\' onclick=\'btn.rowRemove()\'>\uC0AD\uC81C</button>\n                </td>\n                <td class=\'text-center\'>\n                    <button class=\'btn form-control btn-info mx-auto\' syle=\'width:77px\' onclick=\'btn.rowEdit()\'>\uC218\uC815</button>\n                </td>\n            </tr>\n                \n        ';
+            result.append(html);
+        }
+    }, {
+        key: 'memberMngAddRowDisplay',
+        value: function memberMngAddRowDisplay() {
+            var result = $("#memberList > tbody");
+            var tr = $("#memberList > tbody > tr");
+            var index = tr.length + 1;
+
+            var html = '\n            <tr>\n                <td class=\'text-center\'>1</td>\n                <td class=\'text-center\'>\uD64D\uAE38\uB3D9</td>\n                <td class=\'text-center\'>hong</td>\n                <td class=\'text-center\'>1234</td>\n                <td class=\'text-center\'></td>\n                <td class=\'text-center\'>2017-06-20 15:00:00</td>\n                <td class=\'text-center\'>\n                    <button class=\'btn form-control btn-info mx-auto\' syle=\'width:77px\' onclick=\'btn.rowRemove()\'>\uC0AD\uC81C</button>\n                </td>\n                <td class=\'text-center\'>\n                    <button class=\'btn form-control btn-info mx-auto\' syle=\'width:77px\' onclick=\'btn.rowEdit()\'>\uC218\uC815</button>\n                </td>\n            </tr>\n                \n        ';
             result.append(html);
         }
     }]);

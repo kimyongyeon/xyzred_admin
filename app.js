@@ -7,10 +7,16 @@ var bodyParser = require('body-parser');
 
 var index = require('./routes/index');
 var users = require('./routes/users');
+var login = require('./routes/login');
+var logout = require('./routes/logout');
 var inputs = require('./routes/inputs');
 var regs = require('./routes/regs');
+var session = require('express-session');
 
 var app = express();
+var port = 8100;
+var mongoPort = 8003;
+
 var mongoose    = require('mongoose');
 // CONNECT TO MONGODB SERVER
 var db = mongoose.connection;
@@ -19,7 +25,7 @@ db.once('open', function(){
     // CONNECTED TO MONGODB SERVER
     console.log("Connected to mongod server");
 });
-mongoose.connect('mongodb://comblue.xyz:8003/mongodb_tutorial');
+mongoose.connect(`mongodb://comblue.xyz:${mongoPort}/mongodb_tutorial`);
 var Agent = require('./models/agent');
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -31,8 +37,15 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(session({
+    secret: 'xyzred.com-secret',
+    resave: false,
+    saveUninitialized: true
+}));
 
 app.use('/', index);
+app.use('/login', login);
+app.use('/logout', logout);
 app.use('/users', users);
 app.use('/inputs', inputs);
 app.use('/regs', regs);
@@ -56,8 +69,8 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
-app.listen(3000, function () {
-  console.log('Example app listening on port 3000!');
+app.listen(port, function () {
+  console.log(`Example app listening on port ${port}`);
 });
 
 module.exports = app;

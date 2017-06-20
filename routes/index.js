@@ -3,8 +3,12 @@
  */
 var express = require('express');
 const router = express.Router();
+var config = require('../config');
 
 router.get('/', (req, res) => {
+    var session = req.session;
+    if(!session.name) res.redirect('/login');
+
     var arrays = [];
     var index = 1;
     for (var i = 0; i < 5; i++) {
@@ -18,8 +22,9 @@ router.get('/', (req, res) => {
 
     };
     var msg = {
-        title: 'Pug 연습.',
-        tables: arrays
+        title: config.header,
+        tables: arrays,
+        menu: 'home'
     };
     res.render('index', msg);
 });

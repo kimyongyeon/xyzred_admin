@@ -10,26 +10,76 @@ html
     script(src='https://code.jquery.com/jquery-3.2.1.min.js')
     script(src='https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js')
     script(src='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js')
-    
-  body
-    .container
-        
-        p
 
-        h1.text-center XYZ
-            span(style='color:red') RED 
-                span(style='color:blue') - ADMINISTRATOR
 
-        p
+    meta(http-equiv='Content-Type', content='text/html; charset=UTF-8')
+    // Meta, title, CSS, favicons, etc.
+    meta(charset='utf-8')
+    meta(http-equiv='X-UA-Compatible', content='IE=edge')
+    meta(name='viewport', content='width=device-width, initial-scale=1')
+    // Bootstrap
+    link(href='./vendors/bootstrap/dist/css/bootstrap.min.css', rel='stylesheet')
+    // Font Awesome
+    link(href='./vendors/font-awesome/css/font-awesome.min.css', rel='stylesheet')
+    // NProgress
+    link(href='./vendors/nprogress/nprogress.css', rel='stylesheet')
+    // Animate.css
+    link(href='./vendors/animate.css/animate.min.css', rel='stylesheet')
+    // Custom Theme Style
+    link(href='./build/css/custom.min.css', rel='stylesheet')
 
-        form.form-control(id="loginForm", action="/login" method="post")
-            input.form-control.mb-1(type='text' name='userid' placeholder="아이디" value=userid) 
-            input.form-control.mb-1(type='text' name='password' placeholder="패스워드" value=password) 
-            input.form-control.mb-1(type='button' value='로그인' onclick='member.login()')
-            input.form-control.mb-1(type='button' value='회원가입' onclick='member.register()')
+    body.login
+        div
+            a#signup.hiddenanchor
+            a#signin.hiddenanchor
+            .login_wrapper
+                .animate.form.login_form
+                    section.login_content
+                        form#frmLogin.form-signin(name='frmLogin', method='post', action='/login')
+                            h1 xyzred ADMIN
+                            div
+                                input#mb_id.form-control(type='text', name='userid', placeholder='Username', required='')
+                            div
+                                input#mb_password.form-control(type='password', name='password', placeholder='Password', required='')
+                            div
+                                button.btn.btn-default.submit(href='javascript:member.login()') Log in
+                                // a class="reset_pass" href="#">Lost your password?</a
+                            .clearfix
+                            .separator
+                                //
+                                  p class="change_link">New to site?
+                                  <a href="#signup" class="to_register"> Create Account </a>
+                                  </p
+                                .clearfix
+                                br
+                                div
+                                    h1
+                                        i.fa.fa-paw
+                                        |  xyzred ADMIN
+                                    p © 2017 All Rights Reserved xyzred.
+
+                                    script(src='https://code.jquery.com/jquery-3.2.1.min.js')
+                                    script(src="/javascripts/test/member.js")
+
+  //body
+  //  .container
+  //
+  //      p
+  //
+  //      h1.text-center XYZ
+  //          span(style='color:red') RED
+  //              span(style='color:blue') - ADMINISTRATOR
+  //
+  //      p
+  //
+  //      form.form-control(id="loginForm", action="/login" method="post")
+  //          input.form-control.mb-1(type='text' name='userid' placeholder="아이디" value=userid)
+  //          input.form-control.mb-1(type='text' name='password' placeholder="패스워드" value=password)
+  //          input.form-control.mb-1(type='button' value='로그인' onclick='member.login()')
+  //          input.form-control.mb-1(type='button' value='회원가입' onclick='member.register()')
 
         script(src='https://code.jquery.com/jquery-3.2.1.min.js')
-        script(src="/javascripts/member.js")
+        script(src="/javascripts/test/member.js")
 
 
 

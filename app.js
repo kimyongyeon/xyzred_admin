@@ -5,17 +5,36 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
-var index = require('./routes/index');
-var users = require('./routes/users');
-var login = require('./routes/login');
-var logout = require('./routes/logout');
-var inputs = require('./routes/inputs');
-var regs = require('./routes/regs');
-var session = require('express-session');
-
 var app = express();
 var port = 8100;
 var mongoPort = 8003;
+var postgresPort = 8000;
+var postgresId = 'bustabit';
+var postgresPw = '1234';
+
+const pg = require('pg');
+const connectionString = process.env.DATABASE_URL || `postgres://${postgresId}:${postgresPw}@comblue.xyz:${postgresPort}/bustabitdb`;
+const client = new pg.Client(connectionString);
+client.connect();
+
+var index = require('./routes/index');
+var users = require('./routes/test/users');
+var login = require('./routes/login');
+var logout = require('./routes/logout');
+var regs = require('./routes/test/regs');
+
+var agent_create = require('./routes/agent_mng/agent_create');
+var agent_list = require('./routes/agent_mng/agent_list');
+var agent_share = require('./routes/agent_mng/agent_share');
+var agent_trade = require('./routes/agent_mng/agent_trade');
+
+var agent1 = require('./routes/agents/agent1');
+
+var agent_summary = require('./routes/reports/agent_summary');
+var round_summary = require('./routes/reports/round_summary');
+
+
+var session = require('express-session');
 
 var mongoose    = require('mongoose');
 // CONNECT TO MONGODB SERVER
@@ -47,9 +66,23 @@ app.use('/', index);
 app.use('/login', login);
 app.use('/logout', logout);
 app.use('/users', users);
-app.use('/inputs', inputs);
 app.use('/regs', regs);
-var rests = require('./routes/rests')(app, Agent);
+
+app.use('/agent_create', agent_create);
+app.use('/agent_list', agent_list);
+app.use('/agent_share', agent_share);
+app.use('/agent_trade', agent_trade);
+
+app.use('/agent1', agent1);
+
+app.use('/agent_summary', agent_summary);
+app.use('/round_summary', round_summary);
+require('./routes/reports/rest/round_rest')(app, client);
+
+// postgres 처리 할때는 아래와 같이 db정보를 넘겨야 함
+require('./routes/test/inputs')(app, client);
+require('./routes/test/rests')(app, Agent);
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

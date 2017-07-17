@@ -1,0 +1,48 @@
+extends layout
+
+block content
+  p
+  .jumbotron
+    h1.display-3 안녕, xyzred! 관리자
+    p.lead 오늘도 많은 회원을 모집하자. 다단계의 시작은 당신이 주역!
+    hr.my-4
+    p 관리자 화면으로 가서 회원을 끌어 모으세요.
+    p.lead
+      a.btn.btn-primary.btn-lg(href='/inputs', role='button') 더보기
+      
+  p
+  #carouselExampleIndicators.carousel.slide.text-center(data-ride='carousel')
+    ol.carousel-indicators
+      li.active(data-target='#carouselExampleIndicators', data-slide-to='0')
+      li(data-target='#carouselExampleIndicators', data-slide-to='1')
+      li(data-target='#carouselExampleIndicators', data-slide-to='2')
+    .carousel-inner(role='listbox')
+      .carousel-item.active
+        img.d-block.img-fluid(src='http://www.careshop.co.kr/eimages/editor/Filedata_20160302111675636.jpg', alt='First slide' style='width:100%; height:500px')
+      .carousel-item
+        img.d-block.img-fluid(src='http://cfile7.uf.tistory.com/image/21318F385756E3861718C4', alt='Second slide', style='width:100%; height:500px')
+      .carousel-item
+        img.d-block.img-fluid(src='https://cdn.mirror.wiki/http://imgur.com/r3QqYGQ.jpg', alt='Third slide', style='width:100%; height:500px')
+    a.carousel-control-prev(href='#carouselExampleIndicators', role='button', data-slide='prev')
+      span.carousel-control-prev-icon(aria-hidden='true')
+      span.sr-only Previous
+    a.carousel-control-next(href='#carouselExampleIndicators', role='button', data-slide='next')
+      span.carousel-control-next-icon(aria-hidden='true')
+      span.sr-only Next
+  p
+  .row
+    .col-sm-6
+      .card
+        .card-block
+          h3.card-title 본서버
+          p.card-text 본서버에서 제대로 즐겨 보자, 현금을 입금하고 승부하자.
+          a.btn.btn-primary(href='http://x8dev.cafe24.com:81/bitframe', target='_blank') 입장
+    .col-sm-6
+      .card
+        .card-block
+          h3.card-title 테스트서버
+          p.card-text 테스트서버에서 제대로 즐겨 보자, 포인트제로 연습해서 본서버로 이동하자.
+          a.btn.btn-primary(href='http://x8dev.cafe24.com:81/bitframe/inde2.html', target='_blank') 입장
+      
+  
+  script(src='/javascripts/index.js')

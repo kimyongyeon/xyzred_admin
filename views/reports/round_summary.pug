@@ -1,0 +1,46 @@
+extends ../header
+
+block content
+    // page content
+    .right_col(role='main')
+        div
+            .page-title
+                .title_left
+                    h3= title
+                .title_right
+                    .col-md-5.col-sm-5.col-xs-12.form-group.pull-right.top_search
+                        .input-group
+                            input.form-control(type='text', placeholder='Search for...')
+                            span.input-group-btn
+                                button.btn.btn-default(type='button') Go!
+            .clearfix
+            .x_content
+                p.text-muted.font-13.m-b-30
+                    | 에이전트별 가입자 현황을 목록으로 표시 합니다.
+                form.form-horizontal
+                    fieldset
+                        .control-group
+                            .controls
+                                .input-prepend.input-group
+                                    span.add-on.input-group-addon
+                                        i.glyphicon.glyphicon-calendar.fa.fa-calendar
+                                    input#reservation.form-control(type='text', style='width: 200px', name='reservation', value='01/01/2016 - 01/25/2016')
+
+
+                table#round_list.table.table-striped.table-bordered
+                    thead
+                        tr
+                            th.text-center game_id
+                            th.text-center bet
+                            th.text-center cash_out
+                            th.text-center bounus
+                            th.text-center cnt
+                    tbody
+                        tr
+                            td 1
+                            td test
+                            td 100000
+                            td N
+                            td 2017/07/05
+
+    script(src='/javascripts/reports/round_summary.js')

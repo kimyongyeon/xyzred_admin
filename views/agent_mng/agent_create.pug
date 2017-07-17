@@ -1,0 +1,81 @@
+extends ../header
+
+block content
+
+    // page content
+    .right_col(role='main')
+        div
+            .page-title
+                .title_left
+                    h3 #{title}
+                .title_right
+                    .col-md-5.col-sm-5.col-xs-12.form-group.pull-right.top_search
+                        .input-group
+                            input.form-control(type='text', placeholder='Search for...')
+                            span.input-group-btn
+                                button.btn.btn-default(type='button') Go!
+            .clearfix
+            .row
+                // form input mask
+                .col-md-12.col-sm-12.col-xs-12
+                    .x_panel
+                        .x_title
+                            h2 가입항목
+                            ul.nav.navbar-right.panel_toolbox
+                                li
+                                    a.collapse-link
+                                        i.fa.fa-chevron-up
+                                li.dropdown
+                                    a.dropdown-toggle(href='#', data-toggle='dropdown', role='button', aria-expanded='false')
+                                        i.fa.fa-wrench
+                                    ul.dropdown-menu(role='menu')
+                                        li
+                                            a(href='#') Settings 1
+                                        li
+                                            a(href='#') Settings 2
+                                li
+                                    a.close-link
+                                        i.fa.fa-close
+                            .clearfix
+                        .x_content
+                            br
+                            form.form-horizontal.form-label-left
+                                .form-group
+                                    label.control-label.col-md-3.col-sm-3.col-xs-3 agent_id
+                                    .col-md-9.col-sm-9.col-xs-9
+                                        input.form-control(type='text', data-inputmask="'mask' : '****-****-****-****-****-***'", require=true)
+                                .form-group
+                                    label.control-label.col-md-3.col-sm-3.col-xs-3 referer
+                                    .col-md-9.col-sm-9.col-xs-9
+                                        input.form-control(type='text', data-inputmask="'mask' : '****-****-****-****-****-***'")
+                                .form-group
+                                    label.control-label.col-md-3.col-sm-3.col-xs-3 존재유무
+                                    .col-md-9.col-sm-9.col-xs-9
+                                        input.form-control(type='checkbox')
+                                .form-group
+                                    label.control-label.col-md-3.col-sm-3.col-xs-3 가입일
+                                    .col-md-9.col-sm-9.col-xs-9
+                                        input.form-control(type='text', data-inputmask="'mask': '99/99/9999'")
+                                .form-group
+                                    label.control-label.col-md-3.col-sm-3.col-xs-3 전화번호
+                                    .col-md-9.col-sm-9.col-xs-9
+                                        input.form-control(type='text', data-inputmask="'mask' : '(999) 999-9999'")
+                                .form-group
+                                    label.control-label.col-md-3.col-sm-3.col-xs-3 카드번호
+                                    .col-md-9.col-sm-9.col-xs-9
+                                        input.form-control(type='text', data-inputmask="'mask' : '9999-9999-9999-9999'")
+                                .ln_solid
+                                .form-group
+                                    .col-md-9.col-md-offset-3
+                                        button.btn.btn-primary(type='submit') 취소
+                                        button.btn.btn-success(type='submit') 저장
+                                        button.btn.btn-success(type='submit') 리셋
+                // /form input mask
+
+
+
+    // /page content
+
+
+
+

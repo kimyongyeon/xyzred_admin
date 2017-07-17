@@ -1,0 +1,112 @@
+extends ../header
+
+block content
+    // page content
+    .right_col(role='main')
+        div
+            .page-title
+                .title_left
+                    h3 #{title}
+                .title_right
+                    .col-md-5.col-sm-5.col-xs-12.form-group.pull-right.top_search
+                        .input-group
+                            input.form-control(type='text', placeholder='Search for...')
+                            span.input-group-btn
+                                button.btn.btn-default(type='button') Go!
+            .clearfix
+            .row
+                // form input mask
+                .col-md-12.col-sm-12.col-xs-12
+                    .x_panel
+                        .x_title
+                            h2 에이전트목록
+                            ul.nav.navbar-right.panel_toolbox
+                                li
+                                    a.collapse-link
+                                        i.fa.fa-chevron-up
+                                li.dropdown
+                                    a.dropdown-toggle(href='#', data-toggle='dropdown', role='button', aria-expanded='false')
+                                        i.fa.fa-wrench
+                                    ul.dropdown-menu(role='menu')
+                                        li
+                                            a(href='#') Settings 1
+                                        li
+                                            a(href='#') Settings 2
+                                li
+                                    a.close-link
+                                        i.fa.fa-close
+                            .clearfix
+                        .x_content
+                            p.text-muted.font-13.m-b-30
+                                | 가입한 에이전트 항목을 보여 줍니다.
+                                code 수정 및 삭제가 가능해야 함.
+                            table#datatable1.table.table-striped.table-bordered
+                                thead
+                                    tr
+                                        th.text-center key
+                                        th.text-center referer
+                                        th.text-center agent_id
+                                        th.text-center 삭제
+                                        th.text-center 생성일자
+                                        th.text-center 수정
+                                        th.text-center 삭제
+                                tbody
+                                    tr
+                                        td 1
+                                        td http://www.naver.com
+                                        td xyz11
+                                        td N
+                                        td 2017/07/05
+                                        td
+                                            button.form-control.btn-success 수정
+                                        td
+                                            button.form-control.btn-danger 삭제
+
+
+            .row
+                // form input mask
+                .col-md-12.col-sm-12.col-xs-12
+                    .x_panel
+                        .x_title
+                            h2 회원목록
+                            ul.nav.navbar-right.panel_toolbox
+                                li
+                                    a.collapse-link
+                                        i.fa.fa-chevron-up
+                                li.dropdown
+                                    a.dropdown-toggle(href='#', data-toggle='dropdown', role='button', aria-expanded='false')
+                                        i.fa.fa-wrench
+                                    ul.dropdown-menu(role='menu')
+                                        li
+                                            a(href='#') Settings 1
+                                        li
+                                            a(href='#') Settings 2
+                                li
+                                    a.close-link
+                                        i.fa.fa-close
+                            .clearfix
+                        .x_content
+                            p.text-muted.font-13.m-b-30
+                                | 에이전트별 가입자 현황을 목록으로 표시 합니다.
+                                code 수정 및 삭제가 가능해야 함.
+                            table#datatable2.table.table-striped.table-bordered
+                                thead
+                                    tr
+                                        th.text-center seq
+                                        th.text-center 아이디
+                                        th.text-center 금액
+                                        th.text-center 삭제유무
+                                        th.text-center 생성일자
+                                        th.text-center 수정
+                                        th.text-center 삭제
+                                tbody
+                                    tr
+                                        td 1
+                                        td test
+                                        td 100000
+                                        td N
+                                        td 2017/07/05
+                                        td
+                                            button.form-control.btn-success 수정
+                                        td
+                                            button.form-control.btn-danger 삭제

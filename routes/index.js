@@ -21,8 +21,17 @@ router.get('/', (req, res) => {
         index++;
 
     };
+    var total = {
+        users: {
+           name: 2500, per: 4
+        } ,
+        time:  {
+            name: 123.50, per: 3
+        }
+    }
     var msg = {
         title: config.header,
+        userid: 'admin',
         tables: arrays,
         menu: 'home'
     };

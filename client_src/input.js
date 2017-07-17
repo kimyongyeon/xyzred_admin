@@ -1,6 +1,6 @@
 'use strict';
 
-'develope ver 1.0'
+'develope ver 2.0'
 
 $.fn.extend({
     animateCss: function animateCss(animationName) {
@@ -48,34 +48,79 @@ $(document).ready(function () {
     css.type = "text/css";
     css.innerHTML = ".typewrite > .wrap { border-right: 0.08em solid #fff}";
     document.body.appendChild(css);
-    
-    var server_send_data = [];
-    window.btn = new Button(server_send_data);
 
     var render = new Render();
     render.memberMngAddRowDisplay();
 
+    var service = new Service();
+    service.pageList(1, render.pageListDisplay);
+    
+    var server_send_data = [];
+    window.btn = new Controller(render, service, server_send_data);
+    
+
 });
 
-class Button {
+class Agent {
+    
+    constructor() {
+        this._id = $("#_id-input").val() || '';
+        this.agent = $("#agent-input").val() || '';
+        this.referer = $("#referer-input").val() || '';
+    }
 
-    // Button 클래스 생성자 
-    constructor(server_send_data) {
+    getAjaxSendItem () {
+        if (this._id == '') {
+            alert("_id 필수 입력사항 입니다.");
+            $("#_id-input").focus();
+            throw 1;
+        }
+        if (this.agent == '') {
+            alert("agent 필수 입력사항 입니다.");
+            $("#agent-input").focus();
+            throw 2;
+        }
+        if (this.referer == '') {
+            alert("referer 필수 입력사항 입니다.");
+            $("#referer-input").focus();
+            throw 3;
+        }
+        return {
+            _id: this._id,
+            agent: this.agent,
+            referer: this.referer
+        }
+    }
+}
+
+class Controller {
+
+    // Controller 클래스 생성자 
+    constructor(render, service, server_send_data) {
         this.server_send_data = server_send_data;
-        this.service = new Service(server_send_data);
-        this.render = new Render();
+        this.service = service;
+        this.render = render;
     }
     // 등록
     reg () {
         console.log("reg click..");
+        this.service.reg(new Agent().getAjaxSendItem(), (data) => {
+            console.log(data);
+        });
     }
     // 삭제
     remove () {
         console.log("remove click..");
+        this.service.remove(new Agent().getAjaxSendItem(), (data) => {
+            console.log(data);
+        });
     }
     // 수정
     edit () {
         console.log("edit click..");
+        this.service.edit(new Agent().getAjaxSendItem(), (data) => {
+            console.log(data);
+        });
     }
     // 취소 
     cancel () {
@@ -84,34 +129,35 @@ class Button {
     // 더보기 
     moreList () {
         console.log("moreList click");
-        var totCnt = $("#btn_page").attr('totCnt');
-        var perPage = $("#btn_page").attr('perPage');
+        var totCnt = $("#btn_page_more").attr('totCnt');
+        var perPage = $("#btn_page_more").attr('perPage');
         var pageLimit = Math.floor(totCnt / perPage);
-        var page = Math.floor($("#btn_page").val());
+        var page = Math.floor($("#btn_page_more").val());
         if (pageLimit > page) {
-            console.log(pageLimit);
-            location.href = '/inputs?page=' + (page + 1);
+            this.service.pageList(page+1, this.render.pageListDisplay);
+            //location.href = '/inputs?page=' + (page + 1);
         }
     }
     // 처음으로 
     firstList () {
         console.log("firstList click");
-        location.href = '/inputs?page=' + 1;
+        this.service.pageList(1, this.render.pageListDisplay);
+        // location.href = '/inputs?page=' + 1;
     }
     // 마지막으로 
     lastList() {
         console.log("lastList click");
-        var totCnt = $("#btn_page").attr('totCnt');
-        var perPage = $("#btn_page").attr('perPage');
+        var totCnt = $("#btn_page_last").attr('totCnt');
+        var perPage = $("#btn_page_last").attr('perPage');
         var pageLimit = Math.floor(totCnt / perPage);
-        location.href = '/inputs?page=' + pageLimit;
+        this.service.pageList(pageLimit, this.render.pageListDisplay);
+        //location.href = '/inputs?page=' + pageLimit;
     }
     // 상세보기 
-    detail (item) {
-        item = JSON.parse(item);
-        $("#_id-input").val(item._id);
-        $("#agent-input").val(item.site_agent);
-        $("#referer-input").val(item.referer);
+    detail (key, agent_id, referer) {
+        $("#_id-input").val(key);
+        $("#agent-input").val(agent_id);
+        $("#referer-input").val(referer);
     }
     // 서버 전송
     serverSend () {
@@ -122,8 +168,6 @@ class Button {
             $("#alert_server").fadeIn();
             $("#result_set > tbody > tr ").hide(3000);
             $("#result_set > tbody ").empty();
-
-            console.log(this.server_send_data);
 
             var result = $.post("/reg_agent", {
                 msg: JSON.stringify(this.server_send_data)
@@ -170,11 +214,46 @@ class Button {
         this.render.resultTableAddRowDisplay(site_agent, userid, rate);
         this.service.arrayDataPush(site_agent, userid, rate);
     }
-    
+
     
 }
 
 class Render {
+
+    pageListDisplay(data) {
+        var result = $("#result_server_his > tbody");
+        var html = '';
+        for(var i=0; i<data.tables.length; i++) {
+            var item = data.tables[i];
+            html += `
+                <tr>
+                    <td class='text-left' id=key_${item.key}>
+                        <input type='text' value=${item.key} style='border:0;'/>
+                    </td>
+                    <td class='text-left' onclick="btn.detail('${item.key}', '${item.agent_id}', '${item.referer}');">
+                        <input type='text' value=${item.agent_id} style='border:0;'/>
+                    <td class='text-left'>
+                        <input type='text' value=${item.referer} style='border:0;'/>
+                    </td>
+                    <td class='text-left'>${item.reg_date}</td>
+                    <td class='text-left'>
+                        <button class='btn btn-info'>수정</button>
+                        <button class='btn btn-danger'>삭제</button>
+                    </td>
+                </tr>
+                    
+            `;
+        }
+        $("#pageNo").text(`페이지 번호 : ${data.page}`);
+        $("#btn_page_more").attr('value', data.page);
+        $("#btn_page_more").attr('totCnt', data.totCnt);
+        $("#btn_page_more").attr('perPage', data.perPage);
+        $("#btn_page_last").attr('value', data.page);
+        $("#btn_page_last").attr('totCnt', data.totCnt);
+        $("#btn_page_last").attr('perPage', data.perPage);
+        result.append(html);
+    }
+
     // 서버 전송 대기 데이터 행 추가 
     resultTableAddRowDisplay (site_agent, userid, rate) {
         var result = $("#result_set > tbody");
@@ -242,6 +321,48 @@ class Service {
             use_yn: 'Y'
         });
     }
+
+    reg(item, callback) {
+        $.ajax({
+            method: "put",
+            url: "/inputs/reg",
+            data: item
+        })
+        .done(function( msg ) {
+            callback(msg);
+        });
+    }
+    edit(item, callback) {
+        $.ajax({
+            method: "put",
+            url: "/inputs/edit",
+            data: item
+        })
+        .done(function( msg ) {
+            callback(msg);
+        });
+    }
+    remove(item, callback) {
+        $.ajax({
+            method: "delete",
+            url: "/inputs/remove",
+            data: item
+        })
+        .done(function( msg ) {
+            callback(msg);
+        });
+    }
+
+    pageList(page, callback) {
+        $.ajax({
+            method: "get",
+            url: "/inputs/page",
+            data: { page: page }
+        })
+        .done(function( msg ) {
+            callback(msg);
+        });
+    }
 }
 
 //made by vipul mirajkar thevipulm.appspot.com
@@ -287,104 +408,3 @@ TxtType.prototype.tick = function () {
         that.tick();
     }, delta);
 };
-
-// function fnPaging() {
-//     var totCnt = $("#btn_page").attr('totCnt');
-//     var perPage = $("#btn_page").attr('perPage');
-//     var pageLimit = Math.floor(totCnt / perPage);
-//     var page = Math.floor($("#btn_page").val());
-//     if (pageLimit > page) {
-//         console.log(pageLimit);
-//         location.href = '/inputs?page=' + (page + 1);
-//     }
-// }
-
-// function fnFirstPaging() {
-//     location.href = '/inputs?page=' + 1;
-// }
-
-// function fnLastPaging() {
-//     var totCnt = $("#btn_page").attr('totCnt');
-//     var perPage = $("#btn_page").attr('perPage');
-//     var pageLimit = Math.floor(totCnt / perPage);
-//     location.href = '/inputs?page=' + pageLimit;
-// }
-
-// function fnDetail(item) {
-//     item = JSON.parse(item);
-//     $("#_id-input").val(item._id);
-//     $("#agent-input").val(item.site_agent);
-//     $("#referer-input").val(item.referer);
-// }
-
-// function fn1() {
-//     var site_agent = $("input[name=crash_site_agent]").val();
-//     var userid = $("input[name=crash_userid]").val();
-//     var rate = $("input[name=crash_rate]").val();
-//     console.log("crash", site_agent, userid, rate);
-//     result_add(site_agent, userid, rate);
-//     arrayDataPush(site_agent, userid, rate);
-// }
-
-// function arrayDataPush(site_agent, userid, rate) {
-//     server_send_data.push({
-//         site_agent: site_agent,
-//         userid: userid,
-//         rate: rate,
-//         use_yn: 'Y'
-//     });
-// }
-
-// function server_send() {
-//     console.log("서버전송" + $("#result_set > tbody > tr ").length);
-
-//     if ($("#result_set > tbody > tr ").length > 0) {
-//         $("#alert_server > strong").html("서버 전송 완료");
-//         $("#alert_server").fadeIn();
-//         $("#result_set > tbody > tr ").hide(3000);
-//         $("#result_set > tbody ").empty();
-
-//         console.log(server_send_data);
-
-//         var result = $.post("/reg_agent", {
-//             msg: JSON.stringify(server_send_data)
-//         }).done(function (data) {
-//             console.log(data);
-//         });
-
-//         // 초기화 
-//         server_send_data = [];
-//     } else {
-//         $("#alert_server > strong").html("전송할 데이터가 없습니다.");
-//         $("#alert_server").fadeIn();
-//         $("#result_set > tbody ").empty();
-//     }
-// }
-
-// function fnAllRemove() {
-//     $("#result_set > tbody").empty();
-// }
-
-// function result_clear() {
-//     $("#result_set > tbody").empty();
-// }
-
-// function result_add(site_agent, userid, rate) {
-
-//     var result = $("#result_set > tbody");
-//     var tr = $("#result_set > tbody > tr");
-//     var index = tr.length + 1;
-//     var html = '<tr>\n                    <td class=\'text-center\'>' + index + '</td>\n                    <td class=\'text-center\'>' + site_agent + '</td>\n                    <td class=\'text-center\'>' + userid + '</td>\n                    <td class=\'text-center\'>' + rate + '</td>\n                    <td class=\'text-center\'>Y</td>\n                    <td class=\'text-center\'>\n                        <button class=\'btn form-control btn-info mx-auto\' style=\'width:77px\'  onclick=\'fnRowRemove()\'>\uC0AD\uC81C</button>\n                    </td>\n                    <td class=\'text-center\'>\n                        <button class=\'btn form-control btn-info mx-auto\' style=\'width:77px\'  onclick=\'fnRowEdit()\'>\uC218\uC815</button>\n                    </td>\n                </tr>';
-//     result.append(html);
-// }
-
-// var server_send_data = [];
-
-// function fn2() {
-//     var site_agent = $("input[name=risk_site_agent]").val();
-//     var userid = $("input[name=risk_userid]").val();
-//     var rate = $("input[name=risk_rate]").val();
-//     console.log("risk", site_agent, userid, rate);
-//     result_add(site_agent, userid, rate);
-//     arrayDataPush(site_agent, userid, rate);
-// }
